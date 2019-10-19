@@ -7,6 +7,7 @@ class Language:
         self.levelsKnow = getLevelsKnow
 
 
+
 # Класс содержащий в себе все Языки программирования;
 class LanguagesList:
     # Собственно словарь в котором всё храниться;
@@ -26,8 +27,19 @@ class LanguagesList:
             4: {"damage": 30, "price": 3000},
             5: {"damage": 32, "price": 5000},
         }),
+        "Ада": Language("Ада", {
+            0: {"damage": 32, "price": 10000},
+            1: {"damage": 45, "price": 12000},
+        }),
+        "Objective-C": Language("Objective-C", {
+            0: {"damage": 45, "price": 20000},
+            1: {"damage": 49, "price": 23000},
+            2: {"damage": 52, "price": 24000},
+            3: {"damage": 60, "price": 25000},
+            4: {"damage": 61, "price": 24000},
+        }),
     }
 
     # Список всех языков;
-    listLanguages = ["Unknown", "Fortan"]
+    listLanguages = ["Unknown", "Fortan", "Ада", "Objective-C"]
 

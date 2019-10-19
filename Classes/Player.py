@@ -43,6 +43,23 @@ class Player:
                 self.stats["money"] -= NotesList.dictionaryNotes[NotesList.listNotes[num + 1]].price
                 # Обновляю характеристики;
                 self.UpdateStats()
+    
+
+    # Покупка новой программы;
+    def BuySoft(self):
+        # Получаю номер текущего программы;
+        num = ProgrammsList.listSoft.index(self.stats["soft"][0])
+
+        # Смотрю не последний ли это доступная программа;
+        if (num + 1 < len(ProgrammsList.listSoft)):
+            # Смотрю достаточно ли денег;
+            if (self.stats["money"] - ProgrammsList.dictionarySoft[ProgrammsList.listSoft[num + 1]].price >= 0):
+                # Обновляю словарь;
+                self.stats["soft"] = [ProgrammsList.dictionarySoft[ProgrammsList.listSoft[num + 1]].name]
+                # Списываю деньги;
+                self.stats["money"] -= ProgrammsList.dictionarySoft[ProgrammsList.listSoft[num + 1]].price
+                # Обновляю характеристики;
+                self.UpdateStats()
 
 
     # Улучшение уровня владения Языком программирования;
