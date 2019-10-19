@@ -1,5 +1,3 @@
-![GitHub Logo](/Images/ава.png)
-
 # *3.14'Click*
 
 # *Hi user! We are guys from 2Point'S games, this is our new game)*
