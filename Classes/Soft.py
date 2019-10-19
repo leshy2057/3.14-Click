@@ -1,12 +1,19 @@
-class ProgrammsList:
-    def __init__(self):
-        pass
-
-
 class Programm:
-    def __init__(self, getName, getDamage, getPrice):
+    def __init__(self, getName, getPrice, getDamage):
         self.name = getName
         self.damage = getDamage
 
         self.price = getPrice
+
+
+
+class ProgrammsList:
+    dictionarySoft = {
+        "notepad": Programm("Note", 0, 1),
+    }
+
+    listSoft = ["notepad"]
+
+
+
 
