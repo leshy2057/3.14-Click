@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from .Notebooks import NotesList
 from .Soft import ProgrammsList
 from .Languages import LanguagesList
+import json
 
 
 
@@ -12,6 +13,23 @@ class Player:
         self.stats = {"money": 10000000, "languages": ["Unknown", 0], "soft": ["notepad"], "notebook": "Note"}
         
         # Функция обновления характеристик;
+        self.UpdateStats()
+    
+
+    # Сохранение;
+    def Save(self):
+        # Открываю файл;
+        with open("Saves\\savePlayer.save", "w") as file:
+            # Сериализую данные в json;
+            json.dump(self.stats, file)
+    
+    # Загрузка;
+    def Load(self):
+        # Открываю файл;
+        with open("Saves\\savePlayer.save", "r") as file:
+            # Сериализую данные в json;
+            self.stats = json.loads(file.read())
+        # Обновление характеристик;
         self.UpdateStats()
 
 
