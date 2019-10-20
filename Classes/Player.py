@@ -27,7 +27,7 @@ class Player:
     def Load(self):
         # Открываю файл;
         with open("Saves\\savePlayer.save", "r") as file:
-            # Сериализую данные в json;
+            # Загружаю данные из json;
             self.stats = json.loads(file.read())
         # Обновление характеристик;
         self.UpdateStats()
