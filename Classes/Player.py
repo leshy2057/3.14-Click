@@ -10,7 +10,7 @@ import json
 class Player:
     def __init__(self):
         # Инициализирую словарь. Будет использоваться для сохранения в json;
-        self.stats = {"money": 10000000, "languages": ["Unknown", 0], "soft": ["notepad"], "notebook": "Note"}
+        self.stats = {"money": 10000000, "languages": ["Unknown", 0], "soft": "notepad", "notebook": "Note"}
         
         # Функция обновления характеристик;
         self.UpdateStats()
@@ -38,7 +38,7 @@ class Player:
         # Получаю ноутбук;
         self.notebook = NotesList.dictionaryNotes[self.stats["notebook"]]
         # Получаю установленный софт;
-        self.soft = ProgrammsList.dictionarySoft[self.stats["soft"][0]]
+        self.soft = ProgrammsList.dictionarySoft[self.stats["soft"]]
         # Получаю прокачку языка;
         self.language = LanguagesList.dictionaryLanguages[self.stats["languages"][0]]
 
@@ -66,14 +66,14 @@ class Player:
     # Покупка новой программы;
     def BuySoft(self):
         # Получаю номер текущего программы;
-        num = ProgrammsList.listSoft.index(self.stats["soft"][0])
+        num = ProgrammsList.listSoft.index(self.stats["soft"])
 
         # Смотрю не последний ли это доступная программа;
         if (num + 1 < len(ProgrammsList.listSoft)):
             # Смотрю достаточно ли денег;
             if (self.stats["money"] - ProgrammsList.dictionarySoft[ProgrammsList.listSoft[num + 1]].price >= 0):
                 # Обновляю словарь;
-                self.stats["soft"] = [ProgrammsList.dictionarySoft[ProgrammsList.listSoft[num + 1]].name]
+                self.stats["soft"] = ProgrammsList.dictionarySoft[ProgrammsList.listSoft[num + 1]].name
                 # Списываю деньги;
                 self.stats["money"] -= ProgrammsList.dictionarySoft[ProgrammsList.listSoft[num + 1]].price
                 # Обновляю характеристики;
