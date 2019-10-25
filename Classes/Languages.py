@@ -20,7 +20,7 @@ class LanguagesList:
             3: {"damage": 15, "price": 300},
         }),
         "Fortan": Language("Fortan", {
-            0: {"damage": 15, "price": 1000},
+            0: {"damage": 16, "price": 1000},
             1: {"damage": 17, "price": 1200},
             2: {"damage": 19, "price": 1500},
             3: {"damage": 25, "price": 2000},

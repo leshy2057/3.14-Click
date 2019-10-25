@@ -1,31 +1,24 @@
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
+from Classes.Item import Item
 from Classes.Player import Player
-from Classes.Enemy import Enemy
 
-player = Player()
-enemy = Enemy(100, player, 10000, 1)
+ 
+class MyWidget(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setGeometry(300, 300, 600, 800)
 
-player.Save()
+        self.player = Player()
 
-print(f"Damage: {player.damage}; Money: {player.stats['money']}; Enemy health: {enemy.stats['health']}")
+        butn = Item(self)
+        butn.Setting(self.player, "languages")
 
-enemy.AddDamage()
-player.BuyNewNotebook()
-player.BuyNewNotebook()
-player.BuyNewNotebook()
+        self.update()
+ 
 
-print(f"Damage: {player.damage}; Money: {player.stats['money']}; Enemy health: {enemy.stats['health']}")
-
-enemy.AddDamage()
-
-print(f"Damage: {player.damage}; Money: {player.stats['money']}; Enemy health: {enemy.stats['health']}")
-
-enemy.AddDamage()
-
-print(f"Damage: {player.damage}; Money: {player.stats['money']}; Enemy health: {enemy.stats['health']}")
-
-player.Load()
-
-print(f"Damage: {player.damage}; Money: {player.stats['money']}; Enemy health: {enemy.stats['health']}")
-
-# "HZ_c-I"
+app = QApplication(sys.argv)
+ex = MyWidget()
+ex.show()
+sys.exit(app.exec_())
 
