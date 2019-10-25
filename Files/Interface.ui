@@ -14,7 +14,7 @@
    <string>3.14-Click</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/1/fon.png);</string>
+   <string notr="true">background-image: url(Images/fon.png);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="soft_button">
@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/buttons/Programms.jpg);</string>
+     <string notr="true">background-image: url(Images/Programms.jpg);</string>
     </property>
     <property name="text">
      <string/>
@@ -43,7 +43,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/buttons/Language.jpg);</string>
+     <string notr="true">background-image: url(Images/Language.jpg);</string>
     </property>
     <property name="text">
      <string/>
@@ -59,7 +59,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/buttons/Leptops.jpg);</string>
+     <string notr="true">background-image: url(Images/Leptops.jpg);</string>
     </property>
     <property name="text">
      <string/>
@@ -78,7 +78,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/pc/0pc.png);</string>
+     <string notr="true">background-image: url(Images/Notes/1pc.png);</string>
     </property>
    </widget>
    <widget class="QWidget" name="bug_widget" native="true">
@@ -91,7 +91,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/other/жуг.png);</string>
+     <string notr="true">background-image: url(Images/жуг.png);</string>
     </property>
    </widget>
    <zorder>widget</zorder>
