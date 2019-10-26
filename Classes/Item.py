@@ -17,7 +17,7 @@ from .Languages import LanguagesList
 class Item(QtWidgets.QWidget):
     def __init__(self, Form):
         super().__init__()
-        self.move(0, 0)
+        self.move(100, 500)
         self.resize(600, 200)
         self.backgound = QtWidgets.QFrame(Form)
         self.backgound.setGeometry(QtCore.QRect(0, 0, 601, 201))
