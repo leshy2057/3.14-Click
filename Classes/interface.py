@@ -10,6 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import threading, time
 from .Item import Item
 from .Enemy import Enemy
+from random import randint
 
 
 def thread(func):
@@ -84,8 +85,10 @@ class Interface(QtWidgets.QMainWindow):
     	    border: none;
     	    outline: none;
         }""")
-        self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap("Images/жуг.png")))
-        self.bug_widget.setIconSize(QtCore.QSize(251, 251))
+
+        self.GetBugImage()
+        # self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap("Images/bugs/bug.png")))
+        # self.bug_widget.setIconSize(QtCore.QSize(251, 251))
 
         self.widget.raise_()
         self.soft_button.raise_()
@@ -117,6 +120,11 @@ class Interface(QtWidgets.QMainWindow):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "3.14-Click"))
+    
+    def GetBugImage(self):
+        bug ='Images/bugs/bug' + str(randint(1, 6)) + '.png'
+        self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap(bug)))
+
 
     @thread
     def AnimaBugClick(self, none):
@@ -130,6 +138,7 @@ class Interface(QtWidgets.QMainWindow):
         if (self.enemy.dead):
             # Создаю нового врага;
             self.enemy = Enemy(self.player)
+            self.GetBugImage()
         # Обновляю текст здоровья;
         self.health.setText(str(self.enemy.GetDamageForUI()))
         # Обновляю текст монеток;
