@@ -1,11 +1,12 @@
 # Класс противника
 class Enemy:
     def __init__(self, player):
+        self.boss = 5 if (player.stats["defiedEnemies"] % 3 == 0) else 1
         # Создаю словарь для сохранения;
         self.stats = {
-            "maxHealth": 100 * player.stats["defiedEnemies"] / 5,
-            "health": 100 * player.stats["defiedEnemies"] / 5,
-            "money": 100 * player.stats["defiedEnemies"] / 2,
+            "maxHealth": (100 * player.stats["defiedEnemies"] / 5) * self.boss,
+            "health": (100 * player.stats["defiedEnemies"] / 5) * self.boss,
+            "money": (100 * player.stats["defiedEnemies"] / 2) * self.boss,
         }
 
         # Создаю указатель на объект игрока;
@@ -26,7 +27,7 @@ class Enemy:
             self.dead = True
             # Увеличиваю кол-во убитых противников;
             self.player.stats["defiedEnemies"] += 1
-        print(self.stats["health"])
+        print(self.stats["health"], self.player.stats["defiedEnemies"], self.boss)
     
     # Получаю проценты здоровья
     def GetDamageForUI(self):
