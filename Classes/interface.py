@@ -24,6 +24,10 @@ def thread(func):
 class Interface(QtWidgets.QMainWindow):
     def __init__(self, player):
         super().__init__()
+
+        font = QtGui.QFont()
+        font.setFamily("MS Sans Serif")
+        font.setPointSize(30)
         
         self.player = player
         self.enemy = Enemy(player)
@@ -50,10 +54,6 @@ class Interface(QtWidgets.QMainWindow):
         self.pc_button.setStyleSheet("background-image: url(Images/Leptops.jpg);")
         self.pc_button.setText("")
         self.pc_button.setObjectName("pc_button")
-
-        font = QtGui.QFont()
-        font.setFamily("MS Sans Serif")
-        font.setPointSize(30)
 
         self.health = QtWidgets.QLabel(self)
         self.health.move(200, 750)
@@ -86,10 +86,6 @@ class Interface(QtWidgets.QMainWindow):
     	    outline: none;
         }""")
 
-        self.GetBugImage()
-        # self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap("Images/bugs/bug.png")))
-        # self.bug_widget.setIconSize(QtCore.QSize(251, 251))
-
         self.widget.raise_()
         self.soft_button.raise_()
         self.language_button.raise_()
@@ -114,6 +110,14 @@ class Interface(QtWidgets.QMainWindow):
         # self.shopEverything = Item(self)
         # self.shopEverything.raise_()
 
+        self.boss_warning = QtWidgets.QLabel(self) 
+        self.boss_warning.move(500,150)
+        self.boss_warning.setStyleSheet("color: rgb(200, 10, 0);")
+        self.boss_warning.setText('BOSS')
+        self.boss_warning.setFont(font)
+
+        self.GetBugImage()
+
         self.setStyleSheet("background-image: url(Images/fon.png);")
 
 
@@ -123,9 +127,11 @@ class Interface(QtWidgets.QMainWindow):
     
     def GetBugImage(self):
         if self.enemy.boss == 1:
+            self.boss_warning.move(500, 150)
             bug ='Images/bugs/bug' + str(randint(1, 6)) + '.png'
             self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap(bug)))
         elif self.enemy.boss == 5:
+            self.boss_warning.move(200, 150)
             bug ='Images/bugs/bugboss' + str(randint(1, 3)) + '.png'
             self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap(bug)))
 
