@@ -122,8 +122,12 @@ class Interface(QtWidgets.QMainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "3.14-Click"))
     
     def GetBugImage(self):
-        bug ='Images/bugs/bug' + str(randint(1, 6)) + '.png'
-        self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap(bug)))
+        if self.enemy.boss == 1:
+            bug ='Images/bugs/bug' + str(randint(1, 6)) + '.png'
+            self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap(bug)))
+        elif self.enemy.boss == 5:
+            bug ='Images/bugs/bugboss' + str(randint(1, 3)) + '.png'
+            self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap(bug)))
 
 
     @thread
