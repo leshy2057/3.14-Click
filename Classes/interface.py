@@ -22,11 +22,12 @@ def thread(func):
 class Interface(QtWidgets.QMainWindow):
     def __init__(self, player):
         super().__init__()
+        # создание окна
         self.player = player
         self.setObjectName("MainWindow")
         self.setGeometry(300, 300, 500, 800)
-        self.setStyleSheet("background-image: url(Images/fon.png);")
 
+        # создание кнопочек
         self.soft_button = QtWidgets.QPushButton(self)
         self.soft_button.setGeometry(QtCore.QRect(10, 0, 150, 100))
         self.soft_button.setStyleSheet("background-image: url(Images/Programms.jpg);")
@@ -44,6 +45,17 @@ class Interface(QtWidgets.QMainWindow):
         self.pc_button.setStyleSheet("background-image: url(Images/Leptops.jpg);")
         self.pc_button.setText("")
         self.pc_button.setObjectName("pc_button")
+
+        self.money_stats = QtWidgets.QLabel(self)
+        self.money_stats.move(200, 750)
+        self.money_stats.setStyleSheet("color: rgb(200, 10, 0);")
+        self.money_stats.setText('100')
+
+        font = QtGui.QFont()
+        font.setFamily("MS Sans Serif")
+        font.setPointSize(30)
+
+        self.money_stats.setFont(font)
 
         self.widget = QtWidgets.QWidget(self)
         self.widget.setGeometry(QtCore.QRect(140, 410, 300, 300))
@@ -86,8 +98,10 @@ class Interface(QtWidgets.QMainWindow):
         self.pc_button.clicked.connect(lambda: self.SetClicks("pc"))
         self.language_button.clicked.connect(lambda: self.SetClicks("language"))
 
-        self.shopEverything = Item(self)
-        self.shopEverything.raise_()
+        # self.shopEverything = Item(self)
+        # self.shopEverything.raise_()
+
+        self.setStyleSheet("background-image: url(Images/fon.png);")
 
 
     def retranslateUi(self, MainWindow):
@@ -101,4 +115,5 @@ class Interface(QtWidgets.QMainWindow):
         self.bug_widget.setIconSize(QtCore.QSize(251, 251))
 
     def SetClicks(self, getType):
-        self.shopEverything.Setting(self.player, getType)
+        pass
+        #self.shopEverything.Setting(self.player, getType)

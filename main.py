@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 from Classes.Item import Item
 from Classes.Player import Player
-from Classes.Interface import Interface
+from Classes.interface import Interface
 
  
 class MyWidget(Interface):

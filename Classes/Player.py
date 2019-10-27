@@ -68,7 +68,7 @@ class Player:
         # Получаю номер текущего программы;
         num = ProgrammsList.listSoft.index(self.stats["soft"])
 
-        # Смотрю не последний ли это доступная программа;
+        # Смотрю не последняя ли это доступная программа;
         if (num + 1 < len(ProgrammsList.listSoft)):
             # Смотрю достаточно ли денег;
             if (self.stats["money"] - ProgrammsList.dictionarySoft[ProgrammsList.listSoft[num + 1]].price >= 0):
@@ -104,6 +104,8 @@ class Player:
                     self.stats["languages"][1] = 0
                     # Обновляю характеристики;
                     self.UpdateStats()
+    def GiveDamage(self):
+        return self.damage
 
 
 
