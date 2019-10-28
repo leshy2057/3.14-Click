@@ -54,13 +54,7 @@ class Interface(QtWidgets.QMainWindow):
         self.pc_button.setStyleSheet("background-image: url(Images/Leptops.jpg);")
         self.pc_button.setText("")
         self.pc_button.setObjectName("pc_button")
-
-        self.health = QtWidgets.QLabel(self)
-        self.health.move(200, 750)
-        self.health.setStyleSheet("color: rgb(200, 10, 0);")
-        self.health.setText(str(self.enemy.GetDamageForUI()))
-        self.health.setFont(font)
-
+    
         self.money = QtWidgets.QLabel(self)
         self.money.move(0, 750)
         self.money.resize(200, 25)
@@ -137,10 +131,36 @@ class Interface(QtWidgets.QMainWindow):
             self.boss_warning.move(500, 150)
             bug ='Images/bugs/bug' + str(randint(1, 6)) + '.png'
             self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap(bug)))
+            self.enemy.SetImage(bug)
         elif self.enemy.boss == 5:
             self.boss_warning.move(200, 150)
             bug ='Images/bugs/bugboss' + str(randint(1, 3)) + '.png'
+            self.enemy.SetImage(bug)
             self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap(bug)))
+
+    
+
+    def closeEvent(self, event):
+        self.Save()
+
+    def Save(self):
+        self.player.Save()
+        self.enemy.Save()
+    
+    def Load(self):
+        self.player.Load()
+        self.money.setText(str(self.player.stats["money"]))
+
+        self.enemy.Load(self.player)
+        if (self.enemy.stats["image"] != "None"):
+            self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap(self.enemy.stats["image"])))
+        else:
+            self.GetBugImage()
+
+        if self.enemy.boss == 5:
+            self.boss_warning.move(200, 150)
+        
+        self.healthBar.resize(5 * self.enemy.GetDamageForUI(), self.healthBar.size().height())
 
 
     @thread
@@ -156,8 +176,6 @@ class Interface(QtWidgets.QMainWindow):
             # Создаю нового врага;
             self.enemy = Enemy(self.player)
             self.GetBugImage()
-        # Обновляю текст здоровья;
-        self.health.setText(str(self.enemy.GetDamageForUI()))
         # Обновляю размер helthBar'a;
         self.healthBar.resize(5 * self.enemy.GetDamageForUI(), self.healthBar.size().height())
         # Обновляю текст монеток;

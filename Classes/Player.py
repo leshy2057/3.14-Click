@@ -15,7 +15,6 @@ class Player:
         # Функция обновления характеристик;
         self.UpdateStats()
     
-
     # Сохранение;
     def Save(self):
         # Открываю файл;

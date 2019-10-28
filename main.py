@@ -10,10 +10,10 @@ class MyWidget(Interface):
     def __init__(self):
         self.player = Player()
         super().__init__(self.player)
+        self.Load()
  
 
 app = QApplication(sys.argv)
 ex = MyWidget()
 ex.show()
 sys.exit(app.exec_())
-
