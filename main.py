@@ -10,6 +10,9 @@ class MyWidget(Interface):
     def __init__(self):
         self.player = Player()
         super().__init__(self.player)
+        self.item = Item(self)
+        self.item.move(0, 0)
+        self.item.raise_()
         self.update()
  
 

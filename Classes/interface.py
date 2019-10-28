@@ -118,7 +118,7 @@ class Interface(QtWidgets.QMainWindow):
 
         self.GetBugImage()
 
-        self.setStyleSheet("background-image: url(Images/fon.png);")
+        self.setStyleSheet("#MainWindow {background-image: url(Images/fon.png);}")
 
 
     def retranslateUi(self, MainWindow):
