@@ -85,12 +85,17 @@ class Interface(QtWidgets.QMainWindow):
     	    border: none;
     	    outline: none;
         }""")
+        self.bug_widget.setIconSize(QtCore.QSize(251, 251))
+
+        self.healthBar = QtWidgets.QFrame(self)
+        self.healthBar.setGeometry(QtCore.QRect(0, 770, 500, 30))
+        self.healthBar.setObjectName("healthBar")
+        self.healthBar.setStyleSheet("#healthBar {background-image: url(Images/HealtBar1.png);}")
 
         self.widget.raise_()
         self.soft_button.raise_()
         self.language_button.raise_()
         self.pc_button.raise_()
-        # self.bug_widget.raise_()
 
         self.menubar = QtWidgets.QMenuBar(self)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 500, 21))
@@ -104,11 +109,8 @@ class Interface(QtWidgets.QMainWindow):
         QtCore.QMetaObject.connectSlotsByName(self)
 
         self.soft_button.clicked.connect(lambda: self.SetClicks("soft"))
-        self.pc_button.clicked.connect(lambda: self.SetClicks("pc"))
-        self.language_button.clicked.connect(lambda: self.SetClicks("language"))
-
-        # self.shopEverything = Item(self)
-        # self.shopEverything.raise_()
+        self.pc_button.clicked.connect(lambda: self.SetClicks("notes"))
+        self.language_button.clicked.connect(lambda: self.SetClicks("languages"))
 
         self.boss_warning = QtWidgets.QLabel(self) 
         self.boss_warning.move(500,150)
@@ -120,6 +122,11 @@ class Interface(QtWidgets.QMainWindow):
 
         self.setStyleSheet("#MainWindow {background-image: url(Images/fon.png);}")
 
+        self.hideItem = False
+        self.lastItem = ""
+        self.item = Item(self)
+        self.OffItem()
+        self.update()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -151,9 +158,32 @@ class Interface(QtWidgets.QMainWindow):
             self.GetBugImage()
         # Обновляю текст здоровья;
         self.health.setText(str(self.enemy.GetDamageForUI()))
+        # Обновляю размер helthBar'a;
+        self.healthBar.resize(5 * self.enemy.GetDamageForUI(), self.healthBar.size().height())
         # Обновляю текст монеток;
         self.money.setText(str(self.player.stats["money"]))
+        # Скрываю окно обновлений;
+        self.OffItem()
 
+    # Если нажата одна из кнопок улучшения;
     def SetClicks(self, getType):
-        pass
-        #self.shopEverything.Setting(self.player, getType)
+        if (self.hideItem and getType == self.lastItem):
+            # Скрываю окно обновлений;
+            self.OffItem()
+        else:
+            # Показываю окно обновлений;
+            self.OnItem()
+            # Настраиваю Item;
+            self.item.Setting(self.player, getType)
+        self.lastItem = getType
+        self.update()
+    
+    def OnItem(self):
+        self.hideItem = True
+        self.item.setVisible(True)
+        self.item.backgound.setVisible(True)
+    
+    def OffItem(self):
+        self.hideItem = False
+        self.item.setVisible(False)
+        self.item.backgound.setVisible(False)
