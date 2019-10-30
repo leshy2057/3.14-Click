@@ -10,7 +10,7 @@ import json
 class Player:
     def __init__(self):
         # Инициализирую словарь. Будет использоваться для сохранения в json;
-        self.stats = {"money": 10000000, "defiedEnemies": 1, "languages": ["Unknown", 0], "soft": "notepad", "notebook": "Note"}
+        self.stats = {"money": 10000000, "defiedEnemies": 1, "languages": ["Pascal", 0], "soft": "notepad", "notebook": "Note"}
         
         # Функция обновления характеристик;
         self.UpdateStats()
@@ -25,9 +25,9 @@ class Player:
     # Загрузка;
     def Load(self):
         # Открываю файл;
-        with open("Saves\\savePlayer.save", "r") as file:
-            # Загружаю данные из json;
-            self.stats = json.loads(file.read())
+            with open("Saves\\savePlayer.save", "r") as file:
+                # Загружаю данные из json;
+                self.stats = json.loads(file.read())
         # Обновление характеристик;
         self.UpdateStats()
 
