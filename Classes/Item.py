@@ -8,6 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QPixmap
 from .Notebooks import NotesList
 from .Soft import ProgrammsList
 from .Languages import LanguagesList
@@ -167,8 +168,11 @@ class Item(QtWidgets.QWidget):
         if (getType == "languages"):
             player.UpdateLevelLanguage()
             self.image.setStyleSheet(f"#image {{background-image: url({LanguagesList.pictures_dict[self.GetLanguage(player).name]})}}")
+            self.image.setPixmap(QPixmap(LanguagesList.pictures_dict[self.GetLanguage(player).name]).scaled(75, 75))
         elif (getType == "notes"):
             player.BuyNewNotebook()
+            self.image.setStyleSheet(f"#image {{background-image: url({NotesList.dictNotes[self.GetNote(player).name]})}}")
+            self.image.setPixmap(QPixmap(NotesList.dictNotes[self.GetNote(player).name]).scaled(75, 75))
         elif (getType == "soft"):
             player.BuySoft()
         self.settingText(player, getType)

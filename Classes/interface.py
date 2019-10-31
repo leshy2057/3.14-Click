@@ -65,7 +65,7 @@ class Interface(QtWidgets.QMainWindow):
         self.widget = QtWidgets.QWidget(self)
         self.widget.setGeometry(QtCore.QRect(140, 410, 300, 300))
         self.widget.setAutoFillBackground(False)
-        self.widget.setStyleSheet("background-image: url(Images/Notes/1pc.png);")
+        self.widget.setStyleSheet("background-image: url(Images/Notes/0pc.png);")
         self.widget.setObjectName("widget")
 
         self.bug_widget = QtWidgets.QPushButton(self)
@@ -137,6 +137,9 @@ class Interface(QtWidgets.QMainWindow):
             bug ='Images/bugs/bugboss' + str(randint(1, 3)) + '.png'
             self.enemy.SetImage(bug)
             self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap(bug)))
+
+    def UpdateNote(self):
+        self.widget.setPixmap(QPixmap(NotesList.dictNotes[self.GetNote(player).name]).scaled(75, 75))
 
     
 
