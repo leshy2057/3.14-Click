@@ -86,6 +86,8 @@ class Item(QtWidgets.QWidget):
 "color: rgb(255, 255, 255);")
         self.shop.setObjectName("pushButton")
 
+        self.image.raise_()
+
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -125,7 +127,8 @@ class Item(QtWidgets.QWidget):
                 self.price.setText(str(lang.levelsKnow[player.stats["languages"][1] + 1]["price"])) # Цена
                 self.level.setText(str(1)) # Уровень
                 self.damage.setText(str(lang.levelsKnow[player.stats["languages"][1]]["damage"])) # Урон
-        if getType == "notes":
+            self.image.setStyleSheet(f"#image {{background-image: url({LanguagesList.pictures_dict[self.GetLanguage(player).name]})}}")
+        elif getType == "notes":
             note = self.GetNote(player)
 
             if (note.name != NotesList.listNotes[-1]):
@@ -138,7 +141,7 @@ class Item(QtWidgets.QWidget):
                 self.price.setText('MAX') # Цена
                 self.level.setText('MAX') # Уровень
                 self.damage.setText(str(note.damage)) # Урон
-        if getType == "soft":
+        elif getType == "soft":
             soft = self.GetSoft(player)
 
             if (soft.name != player.stats["soft"]):
@@ -152,15 +155,18 @@ class Item(QtWidgets.QWidget):
                 self.level.setText('MAX') # Уровень
                 self.damage.setText(str(soft.damage)) # Урон
 
+    def empty(self): pass
 
     def Setting(self, player, getType):
+        try: self.shop.clicked.disconnect() 
+        except Exception: pass
         self.shop.clicked.connect(lambda: self.UpdateSomeThing(player, getType))
         self.settingText(player, getType)
 
     def UpdateSomeThing(self, player, getType):
         if (getType == "languages"):
             player.UpdateLevelLanguage()
-            self.image.setStyleSheet(LanguagesList.pictures_dict[self.GetLanguage(player)])
+            self.image.setStyleSheet(f"#image {{background-image: url({LanguagesList.pictures_dict[self.GetLanguage(player).name]})}}")
         elif (getType == "notes"):
             player.BuyNewNotebook()
         elif (getType == "soft"):

@@ -42,7 +42,9 @@ class LanguagesList:
 
     # Список всех языков;
     listLanguages = ["Pascal", "Fortran", "Ada", "C++"]
-    pictures_dict = {'Pascal': 'Images/languages/pascal.jpg', 
-    'Fortran': 'Images/languages/fortran.jpg', 
-    'ada':'Images/languages/ada.jpg', 
-    'C++': 'Images/languages/c++.png'}
+    pictures_dict = {
+        'Pascal': 'Images/languages/pascal.jpg', 
+        'Fortran': 'Images/languages/fortran.jpg', 
+        'Ada':'Images/languages/ada.jpg', 
+        'C++': 'Images/languages/c++.png'
+    }
