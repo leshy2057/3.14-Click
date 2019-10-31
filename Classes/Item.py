@@ -160,6 +160,7 @@ class Item(QtWidgets.QWidget):
     def UpdateSomeThing(self, player, getType):
         if (getType == "languages"):
             player.UpdateLevelLanguage()
+            self.image.setStyleSheet(LanguagesList.pictures_dict[self.GetLanguage(player)])
         elif (getType == "notes"):
             player.BuyNewNotebook()
         elif (getType == "soft"):

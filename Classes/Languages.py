@@ -46,4 +46,3 @@ class LanguagesList:
     'Fortran': 'Images/languages/fortran.jpg', 
     'ada':'Images/languages/ada.jpg', 
     'C++': 'Images/languages/c++.png'}
-
