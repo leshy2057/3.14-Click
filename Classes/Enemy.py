@@ -56,7 +56,10 @@ class Enemy:
     def Load(self, player):
         self.boss = 5 if (player.stats["defiedEnemies"] % 3 == 0) else 1
         # Открываю файл;
-        with open("Saves\\saveEnemy.save", "r") as file:
-            # Загружаю данные из json;
-            self.stats = json.loads(file.read())
+        try: 
+            with open("Saves\\saveEnemy.save", "r") as file:
+                # Загружаю данные из json;
+                self.stats = json.loads(file.read())
+        except:
+            pass
 
