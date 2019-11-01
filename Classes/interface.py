@@ -11,6 +11,8 @@ import threading, time
 from .Item import Item
 from .Enemy import Enemy
 from random import randint
+from PyQt5.QtGui import QPixmap
+from .Notebooks import NotesList
 
 
 def thread(func):
@@ -121,6 +123,7 @@ class Interface(QtWidgets.QMainWindow):
         self.item = Item(self)
         self.OffItem()
         self.update()
+        self.UpdateNote(player)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -138,10 +141,16 @@ class Interface(QtWidgets.QMainWindow):
             self.enemy.SetImage(bug)
             self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap(bug)))
 
-    def UpdateNote(self):
-        self.widget.setPixmap(QPixmap(NotesList.dictNotes[self.GetNote(player).name]).scaled(75, 75))
+    def UpdateNote(self, player):
+        self.widget.setStyleSheet(f"#image {{background-image: url({NotesList.dictNotes[self.GetNote(player).name]})}}")
 
-    
+    def GetNote(self, player):
+        num = NotesList.listNotes.index(player.stats["notebook"])
+
+        if (num + 1 < len(NotesList.listNotes)):
+            return NotesList.dictionaryNotes[NotesList.listNotes[num + 1]]
+        else:
+            return NotesList.dictionaryNotes[NotesList.listNotes[num]]
 
     def closeEvent(self, event):
         self.Save()
@@ -164,7 +173,7 @@ class Interface(QtWidgets.QMainWindow):
             self.boss_warning.move(200, 150)
         
         self.healthBar.resize(5 * self.enemy.GetDamageForUI(), self.healthBar.size().height())
-
+        self.UpdateNote(player)
 
     @thread
     def AnimaBugClick(self, none):
@@ -185,6 +194,7 @@ class Interface(QtWidgets.QMainWindow):
         self.money.setText(str(self.player.stats["money"]))
         # Скрываю окно обновлений;
         self.OffItem()
+        self.UpdateNote(player)
 
     # Если нажата одна из кнопок улучшения;
     def SetClicks(self, getType):
