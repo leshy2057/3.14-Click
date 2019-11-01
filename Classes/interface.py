@@ -64,12 +64,6 @@ class Interface(QtWidgets.QMainWindow):
         self.money.setText(str(self.player.stats["money"]))
         self.money.setFont(font)
 
-        self.widget = QtWidgets.QWidget(self)
-        self.widget.setGeometry(QtCore.QRect(140, 410, 300, 300))
-        self.widget.setAutoFillBackground(False)
-        self.widget.setStyleSheet("background-image: url(Images/Notes/0pc.png);")
-        self.widget.setObjectName("widget")
-
         self.bug_widget = QtWidgets.QPushButton(self)
         self.bug_widget.move(0, 0)
         self.bug_widget.resize(500, 600)
@@ -88,7 +82,6 @@ class Interface(QtWidgets.QMainWindow):
         self.healthBar.setObjectName("healthBar")
         self.healthBar.setStyleSheet("#healthBar {background-image: url(Images/HealtBar1.png);}")
 
-        self.widget.raise_()
         self.soft_button.raise_()
         self.language_button.raise_()
         self.pc_button.raise_()
@@ -114,12 +107,20 @@ class Interface(QtWidgets.QMainWindow):
         self.boss_warning.setText('BOSS')
         self.boss_warning.setFont(font)
 
+        self.widget = QtWidgets.QLabel(self)
+        self.widget.move(140, 410)
+        self.widget.resize(300, 300)
+        self.widget.setAutoFillBackground(False)
+        self.widget.setObjectName("widget")
+        self.widget.setPixmap(QtGui.QPixmap("Images/pc/0pc.png);"))
+
         self.GetBugImage()
 
         self.setStyleSheet("#MainWindow {background-image: url(Images/fon.png);}")
 
         self.hideItem = False
         self.lastItem = ""
+        self.widget.raise_()
         self.item = Item(self)
         self.OffItem()
         self.update()
@@ -142,7 +143,7 @@ class Interface(QtWidgets.QMainWindow):
             self.bug_widget.setIcon(QtGui.QIcon(QtGui.QPixmap(bug)))
 
     def UpdateNote(self, player):
-        self.widget.setStyleSheet(f"#image {{background-image: url({NotesList.dictNotes[self.GetNote(player).name]})}}")
+        self.widget.setStyleSheet(f"#widget {{background-image: url({NotesList.dictNotes[player.stats['notebook']]});}}")
 
     def GetNote(self, player):
         num = NotesList.listNotes.index(player.stats["notebook"])
@@ -173,7 +174,7 @@ class Interface(QtWidgets.QMainWindow):
             self.boss_warning.move(200, 150)
         
         self.healthBar.resize(5 * self.enemy.GetDamageForUI(), self.healthBar.size().height())
-        self.UpdateNote(player)
+        self.UpdateNote(self.player)
 
     @thread
     def AnimaBugClick(self, none):
@@ -194,7 +195,7 @@ class Interface(QtWidgets.QMainWindow):
         self.money.setText(str(self.player.stats["money"]))
         # Скрываю окно обновлений;
         self.OffItem()
-        self.UpdateNote(player)
+        self.UpdateNote(self.player)
 
     # Если нажата одна из кнопок улучшения;
     def SetClicks(self, getType):
@@ -205,7 +206,7 @@ class Interface(QtWidgets.QMainWindow):
             # Показываю окно обновлений;
             self.OnItem()
             # Настраиваю Item;
-            self.item.Setting(self.player, getType)
+            self.item.Setting(self.player, getType, func=self.UpdateNote)
         self.lastItem = getType
         self.update()
     

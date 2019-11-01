@@ -29,6 +29,8 @@ class Player:
             with open("Saves\\savePlayer.save", "r") as file:
                 # Загружаю данные из json;
                 self.stats = json.loads(file.read())
+                 # Обновление характеристик;
+                self.UpdateStats()
         except:
             # Обновление характеристик;
             self.UpdateStats()

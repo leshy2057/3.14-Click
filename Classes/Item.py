@@ -156,26 +156,31 @@ class Item(QtWidgets.QWidget):
                 self.level.setText('MAX') # Уровень
                 self.damage.setText(str(soft.damage)) # Урон
 
-    def empty(self): pass
-
-    def Setting(self, player, getType):
+    def Setting(self, player, getType, func):
         try: self.shop.clicked.disconnect() 
         except Exception: pass
-        self.shop.clicked.connect(lambda: self.UpdateSomeThing(player, getType))
+        self.UpdateImage(player, getType)
+        self.shop.clicked.connect(lambda: self.UpdateSomeThing(player, getType, func))
         self.settingText(player, getType)
 
-    def UpdateSomeThing(self, player, getType):
+    def UpdateSomeThing(self, player, getType, func):
         if (getType == "languages"):
             player.UpdateLevelLanguage()
-            self.image.setStyleSheet(f"#image {{background-image: url({LanguagesList.pictures_dict[self.GetLanguage(player).name]})}}")
             self.image.setPixmap(QPixmap(LanguagesList.pictures_dict[self.GetLanguage(player).name]).scaled(75, 75))
         elif (getType == "notes"):
             player.BuyNewNotebook()
-            self.image.setStyleSheet(f"#image {{background-image: url({NotesList.dictNotes[self.GetNote(player).name]})}}")
             self.image.setPixmap(QPixmap(NotesList.dictNotes[self.GetNote(player).name]).scaled(75, 75))
         elif (getType == "soft"):
             player.BuySoft()
+        func(player)
         self.settingText(player, getType)
+        
+    def UpdateImage(self, player, getType):
+        self.image.setPixmap(QPixmap())
+        if (getType == "languages"):
+            self.image.setPixmap(QPixmap(LanguagesList.pictures_dict[self.GetLanguage(player).name]).scaled(75, 75))
+        elif (getType == "notes"):
+            self.image.setPixmap(QPixmap(NotesList.dictNotes[self.GetNote(player).name]).scaled(75, 75))
 
     def GetLanguage(self, player):
         if (player.stats["languages"][1] + 1 <= len(LanguagesList.dictionaryLanguages[player.stats["languages"][0]].levelsKnow.keys())):
