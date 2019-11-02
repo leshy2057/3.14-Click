@@ -10,7 +10,7 @@ import json
 class Player:
     def __init__(self):
         # Инициализирую словарь. Будет использоваться для сохранения в json;
-        self.stats = {"money": 10000000, "defiedEnemies": 1, "languages": ["Plankalkul", 0], "soft": "notepad", "notebook": "Note"}
+        self.stats = {"money": 0, "defiedEnemies": 1, "languages": ["Plankalkul", 0], "soft": "notepad", "notebook": "Note"}
         
         # Функция обновления характеристик;
         self.UpdateStats()
