@@ -17,15 +17,15 @@ class ProgrammsList:
     dictionarySoft = {
         # "<Имя программы>": Programm("<Имя>", <Цена>, <Урон>);
         "notepad": Programm("notepad", 0, 1),
-        "notepad-I": Programm("notepad-I", 100, 2),
-        "notepad-II": Programm("notepad-II", 200, 4),
-        "notepad-III": Programm("notepad-III", 500, 8),
-        "notepad-IV": Programm("notepad-IV", 1000, 10),
-        "notepad-V": Programm("notepad-V", 1500, 15),
+        "cmd": Programm("cmd", 1000, 20),
+        "IDE": Programm("IDE", 20000, 400),
+        "Wing": Programm("Wing", 500000, 8000),
+        "PyCharm": Programm("PyCharm", 1000000, 10000),
+        "VSC": Programm("VSC", 2000000, 2000000),
     }
 
     # Список всех программ;
-    listSoft = ["notepad", "notepad-I", "notepad-II", "notepad-III", "notepad-IV", "notepad-V"]
+    listSoft = ["notepad", "cmd", "IDE", "Wing", "PyCharm", "VSC"]
 
 
 
