@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QFontDatabase
 from .Notebooks import NotesList
 from .Soft import ProgrammsList
 from .Languages import LanguagesList
@@ -18,7 +18,6 @@ from .Languages import LanguagesList
 class Item(QtWidgets.QWidget):
     def __init__(self, Form):
         super().__init__(Form)
-
         self.backgound = QtWidgets.QFrame(Form)
         self.backgound.setGeometry(QtCore.QRect(0, 100, 500, 150))
         self.backgound.setObjectName("backgound")
@@ -28,7 +27,6 @@ class Item(QtWidgets.QWidget):
         self.image.setGeometry(QtCore.QRect(0, 0, 75, 75))
         self.image.move(25, 35)
         # self.image.setStyleSheet("background-image: url(Images/Notes/1pc.png) 0 0 0 0 stretch stretch; border-width: 0px;") # background-color: rgb(255, 0, 0);
-        self.image.setStyleSheet("background-color: rgba(255, 0, 0, 1);")
         self.image.raise_()
         self.image.setText("")
         self.image.setObjectName("image")
@@ -36,55 +34,50 @@ class Item(QtWidgets.QWidget):
         self.damage = QtWidgets.QLabel(self.backgound)
         self.damage.setGeometry(QtCore.QRect(326, 22, 97, 50))
         font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(30)
+        font.setFamily("HACKED")
+        font.setPointSize(20)
         self.damage.setFont(font)
-        self.damage.setStyleSheet("background-color: rgb(144, 255, 134);\n"
-"color: rgb(255, 255, 255);")
+        self.damage.setStyleSheet("color: rgb(255, 255, 255);")
         self.damage.setAlignment(QtCore.Qt.AlignCenter)
         self.damage.setObjectName("label")
 
         self.level = QtWidgets.QLabel(self.backgound)
         self.level.setGeometry(QtCore.QRect(427, 22, 50, 50))
         font = QtGui.QFont()
-        font.setFamily("Arial")
+        font.setFamily("HACKED")
         font.setPointSize(30)
         self.level.setFont(font)
-        self.level.setStyleSheet("background-color: rgb(144, 255, 255);\n"
-"color: rgb(255, 255, 255);")
+        self.level.setStyleSheet("color: rgb(255, 255, 255);")
         self.level.setAlignment(QtCore.Qt.AlignCenter)
         self.level.setObjectName("label_2")
 
         self.name = QtWidgets.QLabel(self.backgound)
         self.name.setGeometry(QtCore.QRect(104, 22, 194, 50))
         font = QtGui.QFont()
-        font.setFamily("Arial")
+        font.setFamily("HACKED")
         font.setPointSize(20)
         self.name.setFont(font)
-        self.name.setStyleSheet("background-color: rgb(255, 142, 134);\n"
-"color: rgb(255, 255, 255);")
+        self.name.setStyleSheet("color: rgb(255, 255, 255);")
         self.name.setAlignment(QtCore.Qt.AlignCenter)
         self.name.setObjectName("label_3")
 
         self.price = QtWidgets.QLabel(self.backgound)
         self.price.setGeometry(QtCore.QRect(124, 96, 178, 30))
         font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
+        font.setFamily("HACKED")
+        font.setPointSize(15)
         self.price.setFont(font)
-        self.price.setStyleSheet("background-color: rgb(255, 255, 134);\n"
-"color: rgb(255, 255, 255);")
+        self.price.setStyleSheet("color: rgb(255, 255, 255);")
         self.price.setAlignment(QtCore.Qt.AlignCenter)
         self.price.setObjectName("label_4")
         
         self.shop = QtWidgets.QPushButton(self.backgound)
         self.shop.setGeometry(QtCore.QRect(322, 96, 158, 30))
         font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(30)
+        font.setFamily("HACKED")
+        font.setPointSize(25)
         self.shop.setFont(font)
-        self.shop.setStyleSheet("background-color: rgb(255, 0, 134);\n"
-"color: rgb(255, 255, 255);")
+        self.shop.setStyleSheet("color: rgb(0, 0, 0);")
         self.shop.setObjectName("pushButton")
 
         self.image.raise_()
@@ -109,51 +102,52 @@ class Item(QtWidgets.QWidget):
             if (player.stats["languages"][1] + 1 < len(LanguagesList.dictionaryLanguages[player.stats["languages"][0]].levelsKnow.keys())):
                 self.name.setText(lang.name) # Имя
                 self.price.setText(str(lang.levelsKnow[player.stats["languages"][1] + 1]["price"])) # Цена
-                self.level.setText(f'N: {str(player.stats["languages"][1] + 1)}') # Уровень
+                self.level.setText(f'{str(player.stats["languages"][1] + 1)}') # Уровень
                 self.damage.setText(str(lang.levelsKnow[player.stats["languages"][1] + 1]["damage"])) # Урон
             elif (player.stats["languages"][1] + 1 == len(LanguagesList.dictionaryLanguages[player.stats["languages"][0]].levelsKnow.keys())):
                 if (LanguagesList.listLanguages.index(player.stats["languages"][0]) + 1 < len(LanguagesList.listLanguages)):
                     lang = LanguagesList.dictionaryLanguages[LanguagesList.listLanguages[LanguagesList.listLanguages.index(player.stats["languages"][0]) + 1]]
                     self.name.setText(lang.name) # Имя
                     self.price.setText(str(lang.levelsKnow[0]["price"])) # Цена
-                    self.level.setText(str(1)) # Уровень
+                    self.level.setText(str(0)) # Уровень
                     self.damage.setText(str(lang.levelsKnow[0]["damage"])) # Урон
                 else:
                     self.name.setText(LanguagesList.listLanguages[-1]) # Имя
-                    self.price.setText("MAX") # Цена
-                    self.level.setText("MAX") # Уровень
+                    self.price.setText("M") # Цена
+                    self.level.setText("M") # Уровень
                     self.damage.setText(str(lang.levelsKnow[player.stats["languages"][1]]["damage"])) # Урон
             else:
                 self.name.setText(lang.name) # Имя
                 self.price.setText(str(lang.levelsKnow[player.stats["languages"][1] + 1]["price"])) # Цена
-                self.level.setText(str(1)) # Уровень
+                self.level.setText(str(0)) # Уровень
                 self.damage.setText(str(lang.levelsKnow[player.stats["languages"][1]]["damage"])) # Урон
-            self.image.setStyleSheet(f"#image {{background-image: url({LanguagesList.pictures_dict[self.GetLanguage(player).name]})}}")
+            self.image.setPixmap(QPixmap(LanguagesList.pictures_dict[lang.name]).scaled(75, 75))
         elif getType == "notes":
             note = self.GetNote(player)
 
             if (note.name != NotesList.listNotes[-1]):
                 self.name.setText(note.name) # Имя
                 self.price.setText(str(note.price)) # Цена
-                self.level.setText('MAX') # Уровень
+                self.level.setText('M') # Уровень
                 self.damage.setText(str(note.damage)) # Урон
             else:
                 self.name.setText(note.name) # Имя
-                self.price.setText('MAX') # Цена
-                self.level.setText('MAX') # Уровень
+                self.price.setText('M') # Цена
+                self.level.setText('M') # Уровень
                 self.damage.setText(str(note.damage)) # Урон
+            self.image.setPixmap(QPixmap(NotesList.dictNotes[note.name]).scaled(75, 75))
         elif getType == "soft":
             soft = self.GetSoft(player)
 
             if (soft.name != player.stats["soft"]):
                 self.name.setText(soft.name) # Имя
                 self.price.setText(str(soft.price)) # Цена
-                self.level.setText('MAX') # Уровень
+                self.level.setText('M') # Уровень
                 self.damage.setText(str(soft.damage)) # Урон
             else:
                 self.name.setText(soft.name) # Имя
-                self.price.setText('MAX') # Цена
-                self.level.setText('MAX') # Уровень
+                self.price.setText('M') # Цена
+                self.level.setText('M') # Уровень
                 self.damage.setText(str(soft.damage)) # Урон
 
     def Setting(self, player, getType, func):

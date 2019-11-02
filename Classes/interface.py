@@ -6,7 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 import threading, time
 from .Item import Item
 from .Enemy import Enemy
@@ -58,11 +58,17 @@ class Interface(QtWidgets.QMainWindow):
         self.pc_button.setObjectName("pc_button")
     
         self.money = QtWidgets.QLabel(self)
-        self.money.move(0, 750)
-        self.money.resize(200, 25)
+        self.money.move(0, 731)
+        self.money.resize(500, 39)
         self.money.setStyleSheet("color: rgb(200, 200, 0);")
         self.money.setText(str(self.player.stats["money"]))
-        self.money.setFont(font)
+        fontH = QtGui.QFont()
+        fontH.setFamily("HACKED")
+        fontH.setPointSize(20)
+        self.money.setFont(fontH)
+        self.money.setObjectName("money")
+        self.money.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter)
+        self.money.setStyleSheet("#money {background-image: url(Images/MoneyImage.png);}")
 
         self.bug_widget = QtWidgets.QPushButton(self)
         self.bug_widget.move(0, 0)
@@ -125,11 +131,25 @@ class Interface(QtWidgets.QMainWindow):
         self.OffItem()
         self.update()
         self.UpdateNote(player)
+        self.startAudio()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "3.14-Click"))
     
+    def startAudio(self):
+        self.playlist = QtMultimedia.QMediaPlaylist()
+        self.playlist.addMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("Files\\Sound\\MainTheme.mp3")))
+        self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.Loop)
+
+        self.sound = QtMultimedia.QSound("Files\\Sound\\ClickSound.wav")
+
+        self.audio = QtMultimedia.QMediaPlayer()
+        self.audio.setPlaylist(self.playlist)
+        self.audio.play()
+        self.audio.setVolume(20)
+        
+
     def GetBugImage(self):
         if self.enemy.boss == 1:
             self.boss_warning.move(500, 150)
@@ -181,9 +201,11 @@ class Interface(QtWidgets.QMainWindow):
         self.bug_widget.setIconSize(QtCore.QSize(228, 228))
         time.sleep(0.1)
         self.bug_widget.setIconSize(QtCore.QSize(251, 251))
+        return
 
     # Событие клика по жуку;
     def BugClick(self):
+        self.sound.play()
         # Если враг побуждён:
         if (self.enemy.dead):
             # Создаю нового врага;

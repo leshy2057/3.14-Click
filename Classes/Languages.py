@@ -31,6 +31,9 @@ class LanguagesList:
             0: {"damage": 32, "price": 10000},
             1: {"damage": 34, "price": 12000},
         }),
+        "WC": Language("WC", {
+            0: {"damage": 36, "price": 13000},
+        }),
         "Basic": Language("Basic", {
             0: {"damage": 37, "price": 14000},
             1: {"damage": 40, "price": 17000},
@@ -87,12 +90,13 @@ class LanguagesList:
     }
 
     # Список всех языков;
-    listLanguages = ["Plankalkul", "Fortran", "Ada", "Basic", "Pascal", "C++", "Python", "Java", "Php", "C#", "Python 4.0"]
+    listLanguages = ["Plankalkul", "Fortran", "Ada", "WC", "Basic", "Pascal", "C++", "Python", "Java", "Php", "C#", "Python 4.0"]
     pictures_dict = {
         'Plankalkul': 'Images/languages/ada.jpg',
         'Fortran': 'Images/languages/fortran.jpg', 
-        'Ada':'Images/languages/ada.jpg', 
-        'Basic':'Images/languages/basic.jpg',
+        'Ada': 'Images/languages/ada.jpg',
+        "WC": "Images/languages/WhatColorLang.png", 
+        'Basic': 'Images/languages/basic.jpg',
         'Pascal': 'Images/languages/pascal.jpg', 
         'C++': 'Images/languages/c++.png',
         'Python': 'Images/languages/python.jpg',
