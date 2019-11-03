@@ -228,7 +228,7 @@ class Interface(QtWidgets.QMainWindow):
             # Показываю окно обновлений;
             self.OnItem()
             # Настраиваю Item;
-            self.item.Setting(self.player, getType, func=self.UpdateNote)
+            self.item.Setting(self.player, getType, func=self.UpdateNote, money=self.money)
         self.lastItem = getType
         self.update()
     

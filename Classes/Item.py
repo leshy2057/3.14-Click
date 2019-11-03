@@ -150,14 +150,14 @@ class Item(QtWidgets.QWidget):
                 self.level.setText('M') # Уровень
                 self.damage.setText(str(soft.damage)) # Урон
 
-    def Setting(self, player, getType, func):
+    def Setting(self, player, getType, func, money):
         try: self.shop.clicked.disconnect() 
         except Exception: pass
         self.UpdateImage(player, getType)
-        self.shop.clicked.connect(lambda: self.UpdateSomeThing(player, getType, func))
+        self.shop.clicked.connect(lambda: self.UpdateSomeThing(player, getType, func, money))
         self.settingText(player, getType)
 
-    def UpdateSomeThing(self, player, getType, func):
+    def UpdateSomeThing(self, player, getType, func, money):
         if (getType == "languages"):
             player.UpdateLevelLanguage()
             self.image.setPixmap(QPixmap(LanguagesList.pictures_dict[self.GetLanguage(player).name]).scaled(75, 75))
@@ -166,7 +166,9 @@ class Item(QtWidgets.QWidget):
             self.image.setPixmap(QPixmap(NotesList.dictNotes[self.GetNote(player).name]).scaled(75, 75))
         elif (getType == "soft"):
             player.BuySoft()
+        money.setText(str(player.stats["money"]))
         func(player)
+        
         self.settingText(player, getType)
         
     def UpdateImage(self, player, getType):
