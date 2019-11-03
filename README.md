@@ -8,10 +8,9 @@
 # How to use:
 ## Launch and play)
 
-# Required packages:
-Some text!
-
 # Creators:
 * Hiro Protagonist;
 * Keynch;
+
+# P.S. If you need more information, then go over to wiki.
 
