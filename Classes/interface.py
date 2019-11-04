@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
-import threading, time
+import threading, time, sqlite3
 from .Item import Item
 from .Enemy import Enemy
 from random import randint
@@ -108,10 +108,20 @@ class Interface(QtWidgets.QMainWindow):
         self.language_button.clicked.connect(lambda: self.SetClicks("languages"))
 
         self.boss_warning = QtWidgets.QLabel(self) 
-        self.boss_warning.move(500,150)
+        self.boss_warning.move(500, 150)
         self.boss_warning.setStyleSheet("color: rgb(200, 10, 0);")
         self.boss_warning.setText('BOSS')
         self.boss_warning.setFont(font)
+
+        self.connection = sqlite3.connect("Files\\Main\\phrases.db")
+        self.cursor = self.connection.cursor()
+        self.countItems = len(self.cursor.execute("""SELECT * FROM Phrases""").fetchall())
+
+        self.phraseText = QtWidgets.QLabel(self) 
+        self.phraseText.move(100, 450)
+        self.phraseText.setStyleSheet("color: rgb(200, 10, 0);")
+        self.phraseText.setText('BOSS')
+        self.phraseText.setFont(font)
 
         self.widget = QtWidgets.QLabel(self)
         self.widget.move(140, 410)
@@ -123,10 +133,11 @@ class Interface(QtWidgets.QMainWindow):
         self.GetBugImage()
 
         self.setStyleSheet("#MainWindow {background-image: url(Images/fon.png);}")
-
+        self.setPhraseText()
         self.hideItem = False
         self.lastItem = ""
         self.widget.raise_()
+        self.phraseText.raise_()
         self.item = Item(self)
         self.OffItem()
         self.update()
@@ -175,6 +186,7 @@ class Interface(QtWidgets.QMainWindow):
 
     def closeEvent(self, event):
         self.audio.stop()
+        self.connection.close()
         self.Save()
 
     def Save(self):
@@ -212,6 +224,7 @@ class Interface(QtWidgets.QMainWindow):
             # Создаю нового врага;
             self.enemy = Enemy(self.player)
             self.GetBugImage()
+            self.setPhraseText()
         # Обновляю размер helthBar'a;
         self.healthBar.resize(5 * self.enemy.GetDamageForUI(), self.healthBar.size().height())
         # Обновляю текст монеток;
@@ -242,3 +255,7 @@ class Interface(QtWidgets.QMainWindow):
         self.hideItem = False
         self.item.setVisible(False)
         self.item.backgound.setVisible(False)
+    
+    def setPhraseText(self):
+        self.phraseText.setText(self.cursor.execute(f"""SELECT phrase FROM Phrases
+                                        WHERE id = ABS(RANDOM()) % (0 - {self.countItems}) + 0""").fetchall()[0][0])
