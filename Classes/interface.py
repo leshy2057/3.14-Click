@@ -174,6 +174,7 @@ class Interface(QtWidgets.QMainWindow):
             return NotesList.dictionaryNotes[NotesList.listNotes[num]]
 
     def closeEvent(self, event):
+        self.audio.stop()
         self.Save()
 
     def Save(self):
