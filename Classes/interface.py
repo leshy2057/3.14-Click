@@ -37,6 +37,7 @@ class Interface(QtWidgets.QMainWindow):
         # создание окна
         self.setObjectName("MainWindow")
         self.setGeometry(300, 300, 500, 800)
+        self.setFixedSize(500, 800)
 
         # создание кнопочек
         self.soft_button = QtWidgets.QPushButton(self)
@@ -111,17 +112,18 @@ class Interface(QtWidgets.QMainWindow):
         self.boss_warning.move(500, 150)
         self.boss_warning.setStyleSheet("color: rgb(200, 10, 0);")
         self.boss_warning.setText('BOSS')
-        self.boss_warning.setFont(font)
+        self.boss_warning.setFont(fontH)
 
         self.connection = sqlite3.connect("Files\\Main\\phrases.db")
         self.cursor = self.connection.cursor()
         self.countItems = len(self.cursor.execute("""SELECT * FROM Phrases""").fetchall())
 
         self.phraseText = QtWidgets.QLabel(self) 
-        self.phraseText.move(100, 450)
+        self.phraseText.resize(500, 100)
+        self.phraseText.move(25, 450)
         self.phraseText.setStyleSheet("color: rgb(200, 10, 0);")
         self.phraseText.setText('BOSS')
-        self.phraseText.setFont(font)
+        self.phraseText.setFont(fontH)
 
         self.widget = QtWidgets.QLabel(self)
         self.widget.move(140, 410)
