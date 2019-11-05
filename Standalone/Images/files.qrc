@@ -1,0 +1,24 @@
+<RCC>
+  <qresource prefix="1">
+    <file>fon.png</file>
+  </qresource>
+  <qresource prefix="other">
+    <file>жуг.png</file>
+  </qresource>
+  <qresource prefix="pc">
+    <file>0pc.png</file>
+    <file>2pc.png</file>
+    <file>3pc.png</file>
+    <file>4pc.png</file>
+    <file>5pc.png</file>
+    <file>6pc.png</file>
+    <file>7pc.png</file>
+    <file>1pc.png</file>
+    <file>8pc.png</file>
+  </qresource>
+  <qresource prefix="buttons">
+    <file>Leptops.jpg</file>
+    <file>Language.jpg</file>
+    <file>Programms.jpg</file>
+  </qresource>
+</RCC>
