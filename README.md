@@ -6,7 +6,7 @@
 ### This simple cliker. You must fixing the bugs and EARN MORE MONEY THAN CONQUER THE WO... Kh-kh-kh-kh... So what am I talking about? Ah, for sure...
 
 # How to use:
-### Launch and play)
+### Launch main.py and play) If you want compile the exe file, then go to wiki.
 
 # Creators:
 ###* Hiro Protagonist;
