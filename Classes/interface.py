@@ -146,6 +146,12 @@ class Interface(QtWidgets.QMainWindow):
         self.UpdateNote(player)
         self.startAudio()
 
+    def keyPressEvent(self, e):
+        if e.key() == QtCore.Qt.Key_Space:
+            self.AnimaBugClick(True)
+            self.enemy.AddDamage()
+            self.BugClick()
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "3.14-Click"))
