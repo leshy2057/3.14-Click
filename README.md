@@ -9,8 +9,8 @@
 ### Launch main.py and play) If you want compile the exe file, then go to wiki.
 
 # Creators:
-###* Hiro Protagonist;
-###* Keynch;
+* Hiro Protagonist;
+* Keynch;
 
 # P.S. If you need more information, then go over to wiki.
 
